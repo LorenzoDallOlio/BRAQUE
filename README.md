@@ -47,6 +47,8 @@ Please notice that in our paper specific code we used original_db with 3 more co
 
 
 
+
+
 ### Setup script parameters
 
 At the begin of the script there are some further parameters you can play with. This organization will be moved in a class constructor, but as previously mentioned the paper specific code is maintained as untouched as possible to reproduce paper results. The important parameters to set are:
@@ -71,6 +73,8 @@ At the begin of the script there are some further parameters you can play with. 
 19. __large_db_procedure__: boolean, whether or not to use large db procedure, which consists of loading just the embedding, clustering it, and finally loading the remaining dbs, use this if clustering does not work for memory issues
 
 All global parameters are provided with a default value, for suggestion on values or ranges for the main pipeline parameters please consult the table 1 of our paper and the relative discussion.
+
+
 
 
 
@@ -110,7 +114,7 @@ All global parameters are provided with a default value, for suggestion on value
 
 
 
-Please notice that the tag \<specific for the paper\> is referred to portions of code that are useless for a general dataset, but needed for our specific dataset to reproduce the paper's results.
+Please notice that the tag ___\<specific for the paper\>___ is referred to portions of code that are useless for a general dataset, but needed for our specific dataset to reproduce the paper's results.
 
 
 
