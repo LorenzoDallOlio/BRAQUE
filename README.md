@@ -39,7 +39,7 @@ The essential elements to properly run BRAQUE are the following variables:
 3. __reference__: a reference file, in .csv format, where every row must correspond to different markers. This reference file needs to have few more columns to fully perform the whole pipeline:
     1. __correspondence_column__: header of the reference file column which contains features names, may contain multiple variants in the format "variant1/variant2/.../variantN"
     2. __naming_column__: header of the reference file column which contains features names that shall be used in plots/results
-    3. __interpretative_column__: header of the reference file column which contains features associated propery
+    3. __interpretative_column__: header of the reference file column which contains features associated property
     4. __importance_column__: header of the reference file column which contains 1 for important features that should be used for summary plot
     5. _(optional)_ __markers_subgroup__: header of the reference file column which might opionally be used to keep only a subset of features. if used shall be a 0/1 coded column, with 1 for keeping the feature at that specific row, or 0 to exlude it. use an empty string ("") to avoid such subselection
     
