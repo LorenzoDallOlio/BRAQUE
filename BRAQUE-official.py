@@ -17,7 +17,7 @@ from datetime import datetime
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 
-# if you have an Intel processor, we strongly suggest you to install 
+# if you have an Intel processor, we strongly suggest you to install sklearnex
 # and uncomment the following two lines
 # from sklearnex import patch_sklearn
 # patch_sklearn()
@@ -185,13 +185,12 @@ def find_names(markers_names):
 # -------------------------------------------------------------------------
 
 
-def add_main_markers_significance_columns(db, res, res_p, find_n=3, undef_thr=0., thrs_p=0.05):
+def add_main_markers_significance_columns(db, res, find_n=3, undef_thr=0., thrs_p=0.05):
 
     """Add inplace to input pandas dataframe the column 'MainMarkers' and a column with their interpretation.
     
     \ndb (pandas.DataFrame): processed dataframe containing cells x markers values
     \nres (pandas DataFrame with shape n_clusters x n_features): DataFrame containing effect_sizes resulting from robust d computation by Vendekar et al. of how much each feature is overexpressed for each cluster, this object is the first output of the function 'markers_importance_per_cluster'
-    \nres_p (pandas DataFrame with shape n_clusters x n_features): DataFrame containing p_values resulting from t-tests of how much each feature is overexpressed for each cluster, this object is the second output of the function 'markers_importance_per_cluster'
     \nfind_n (positive integer): how many main markers to find, at most
     \nundef_thr (non-negative float): threshold below which an effect size is never considered relevant
     \nthrs_p (float in range ]0, 1[): which significance threshold should be adopted for p_values.
@@ -331,6 +330,9 @@ def features_selection(db, reference, drop_unclear=True,
             if drop_unclear:
                 db.drop(columns=column, inplace=True)
                 verboseprint("Dropping", column, "due to 'unknown significance'.")
+                
+
+        n_markers = len(db.columns)
 
     return db
 
@@ -372,6 +374,9 @@ def lognormal_shrinkage(db, subsampling=1, max_n_gaussians=20,
     verboseprint("list of genes to process")
     for i, column in enumerate(db.columns):
         verboseprint(i+1, column)
+        
+    with open(folder+"/preprocessed_markers.txt", 'w') as f:
+        print("list of features which completed the lognormal shrinkage preprocessing step", file=f)
 
     n_populations = {}  # to store number of gaussians per marker information
     for i, column in enumerate(db.columns):
@@ -395,11 +400,11 @@ def lognormal_shrinkage(db, subsampling=1, max_n_gaussians=20,
         n_populations[column] = len(np.unique(preds))
 
         # saving checkpoint, in case something goes wrong mid-way, check for the last printed marker and perform preprocessing only on the remainin ones
-        db.to_csv("./quantized_dbs/"+area+"_quantized("+str(max_n_gaussians)+","+str(contraction_factor)+").csv", 
+        db.to_csv(base_folder+"quantized_dbs/"+area+"_quantized("+str(max_n_gaussians)+","+str(contraction_factor)+").csv", 
                   index=False)
 
         # print to file preprocessed markers list
-        with open(folder+area+"/preprocessed_markers.txt", 'aw') as f:
+        with open(folder+"/preprocessed_markers.txt", 'a') as f:
             print(column+" Done, with ", len(np.unique(preds)), "within-marker populations.", file=f)
 
 
@@ -407,7 +412,7 @@ def lognormal_shrinkage(db, subsampling=1, max_n_gaussians=20,
     db = (db - db.median()) / (np.abs(db - db.mean()).mean())
 
     # save to .json file the number of gaussians (populations) per marker
-    with open("./quantized_dbs/"+area+"_n_populations.json", "w") as f:
+    with open(base_folder+"quantized_dbs/"+area+"_n_populations.json", "w") as f:
         json.dump(n_populations, f)
 
     if populations_plot:
@@ -582,7 +587,7 @@ def markers_importance_per_cluster(use, clusters, compare_with='rest'):
 
 
 def most_important_effect_sizes(rs, rs_p, n, thrs_p=0.05, 
-                                save_plot=False, path="./cluster__expression.png"):
+                                save_plot=False, path=base_folder+"cluster__expression.png"):
     
     """Horizontal bar plot with highest effect size markers for a given cluster
     
@@ -716,7 +721,7 @@ def plot_markers_on_embedding(db, original_db, embedding, real_pos,
 
 
 def plot_embedding_clusters(clusters_list, real_pos, embedding, clusterer,
-                            save_plot=False, path="./__clusters.png"):
+                            save_plot=False, path=base_folder+"__clusters.png"):
     
     """Plot HDBSCAN clusters onto real space and UMAP embedding coordinates with appropriate colormap
     
@@ -740,7 +745,7 @@ def plot_embedding_clusters(clusters_list, real_pos, embedding, clusterer,
 
     # plot title
     fig.suptitle("\nHDBSCAN clustering (eps="+str(clusterer.cluster_selection_epsilon)\
-                 +", "+str(100*mindim/len(clusters_list))[:6]+" % of cells for min_clusters)\nclusters: "+str(np.max(clusters_list)+1)+\
+                 +", "+str(100*clusterer.min_samples/len(clusters_list))[:6]+" % of cells for min_clusters)\nclusters: "+str(np.max(clusters_list)+1)+\
                  "   |   noise: "+str(np.where(clusters_list == -1, 1, 0).sum()))
 
     # show legend iff there are less than 150 total clusters, otherwise it would be unreadable
@@ -764,9 +769,10 @@ def plot_embedding_clusters(clusters_list, real_pos, embedding, clusterer,
 
 def whole_dataset_summary_plots(db, area, alpha=0.9, size=1., legend_size=200,
                                 plot_with_legend=True, plot_without_legend=True,
-                                plot_noise=True, save_plot=False, base_path="./"):
+                                plot_noise=True, save_plot=False, 
+                                base_path=base_folder+""):
     
-    """Plot a Maximum of 4 plots (2 with legend and 2 without legend) which summarize the main markers and their """+interpretative_column+""" for each cluster
+    """Plot a Maximum of 4 plots (2 with legend and 2 without legend) which summarize the main markers and their interpretative_column for each cluster
 
     \ndb (pandas.DataFrame): processed dataframe containing cells x markers values
     \narea (str): filename of the db
@@ -853,7 +859,8 @@ def whole_dataset_summary_plots(db, area, alpha=0.9, size=1., legend_size=200,
 
     
 def plot_cluster_spatial_location(lbl, embedding, pos, mask, 
-                                  save_plot=False, path="./cluster__position.png"):
+                                  save_plot=False, 
+                                  path=base_folder+"cluster__position.png"):
 
     """Plot cluster position in UMAP embedding and in real space, together with a summary of Tier1 and Tier2 markers.
     
@@ -902,7 +909,7 @@ def plot_cluster_spatial_location(lbl, embedding, pos, mask,
 
 def monitoring_features_plot(original_db, mask, cluster_name, 
                              monitoring_features, palette=[(0.2, 0.5, 1.), (1., 0.2, 0.2)], 
-                             save_plot=False, path='./cluster__monitoring_featuresining.png'):
+                             save_plot=False, path=base_folder+"cluster__monitoring_featuresining.png"):
     
     """Plot Kernel Density Estimation to compare a cluster with whole dataset using some monitoring features.
     
@@ -1017,12 +1024,14 @@ if not large_db_procedure:
     # FEATURES SELECTION, PREPROCESSING, and UMAP embedding
 
     # load reference file for columns: define subgroups, discarded markers, etc.
-    reference = pd.read_csv(reference_file, skiprows=1)
+    reference = pd.read_csv(reference_file)
     print("loaded reference file")
 
 
     # creating directories to store plots/embedding
-    for directory in [folder, folder+"positions/", folder+'expressions/', folder+"markers/"]:
+    for directory in [folder, folder+"positions/", folder+'expressions/', 
+                      folder+"markers/", base_folder+"data",
+                      base_folder+"quantized_dbs", base_folder+"embeddings"]:
         if not os.path.isdir(directory):
             os.makedirs(directory)
             print("creating", directory)
@@ -1031,7 +1040,7 @@ if not large_db_procedure:
 
     # eventually load, previously preprocessed db
     if load_db:
-        db = pd.read_csv("./quantized_dbs/"+area+"_quantized("+str(max_n_gaussians)+","+str(contraction_factor)+").csv")
+        db = pd.read_csv(base_folder+"quantized_dbs/"+area+"_quantized("+str(max_n_gaussians)+","+str(contraction_factor)+").csv")
 
         # robust standardization
         db = (db-db.median())/(np.abs(db - db.mean()).mean())
@@ -1062,7 +1071,7 @@ if not large_db_procedure:
         # <SPECIFIC FOR THE PAPER>
         if area == "DatasetCodex":
             verboseprint("Starting load of the data at:", datetime.now())
-            original_db = pd.read_csv("./data/"+area+".csv").iloc[:, 1:]
+            original_db = pd.read_csv(base_folder+"data/"+area+".csv").iloc[:, 1:]
 
             # to have marker names in the same format as we are used, which is just marker name with no channel or separators
             new_names = {key:value for (key,value) in zip(original_db.columns, [a.split('.')[-1] for a in original_db.columns])}
@@ -1075,7 +1084,7 @@ if not large_db_procedure:
 
         else:
             verboseprint("Starting load of the data at:", datetime.now())
-            original_db = pd.read_csv("./data/"+area+".csv")
+            original_db = pd.read_csv(base_folder+"data/"+area+".csv")
 
             # to have marker names in the same format as we are used, which is just marker name with no channel or separators
             new_names = {key:value for (key,value) in zip(original_db.columns, [a.split('_')[-1] for a in original_db.columns])}
@@ -1151,7 +1160,7 @@ else:
     # only now load the whole db
 
     # load reference file for columns: define subgroups, discarded markers, etc.
-    reference = pd.read_csv(reference_file, skiprows=1)
+    reference = pd.read_csv(reference_file)
     print("loaded reference file")
 
 
@@ -1164,7 +1173,7 @@ else:
             verboseprint("using pre existing", directory)
 
     # load previously preprocessed db
-    db = pd.read_csv("./quantized_dbs/"+area+"_quantized("+str(max_n_gaussians)+","+str(contraction_factor)+").csv")
+    db = pd.read_csv(base_folder+"quantized_dbs/"+area+"_quantized("+str(max_n_gaussians)+","+str(contraction_factor)+").csv")
 
     # robust standardization
     db = (db-db.median())/(np.abs(db - db.mean()).mean())
@@ -1261,7 +1270,7 @@ if not load_clusters:
                                                                          # 0.11 for L2, L3, T1, T2
                                                                          # 0.15 for T3
                                         cluster_selection_method='leaf')
-        sub_db['cluster'] = sub_clusterer.fit_predict(sub_c)
+        sub_db['cluster'] = sub_clusterer.fit_predict(sub_embedding)
 
         plot_embedding_clusters(sub_db['cluster'], sub_pos, sub_embedding, sub_clusterer, save_plot=True, 
                                 path=folder+area+"__clusters_reclustering_core_zoom.png")
@@ -1323,7 +1332,7 @@ res, res_p = markers_importance_per_cluster(use, db.loc[:, 'cluster'], compare_w
 
 
 
-db = add_main_markers_significance_columns(db, res, res_p, thrs_p=thrs_p)
+db = add_main_markers_significance_columns(db, res, thrs_p=thrs_p)
 
 
 
