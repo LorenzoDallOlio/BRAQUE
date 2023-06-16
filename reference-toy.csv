@@ -1,0 +1,10 @@
+Subgroup1,Important,Feature,Official Name,Significance
+1,1,FeatureA,A,T cells
+0,1,FeatureB,B,Dentritic cells
+0,0,FeatureC,C,
+0,1,Featured / FeatureD / featureD/featured,D,B cells
+1,0,FeatureE,E,T cells
+0,1,FeatureF,F,Macrophages
+1,0,FeatureG,G,Activated T cells
+0,0,FeatureH,H,IGNORE
+1,1,FeatureI,I,T reg
