@@ -41,10 +41,10 @@ This section explains the python class installed and imported with standard proc
 ### The BRAQUE class
 
 ___class constructor (self, original_db, pos, reference, correspondence_column, naming_column, interpretative_column, importance_column, features_subgroup='', area='dataset', perform_features_selection=True, perform_lognormal_shrinkage=True, subsampling=1, max_n_gaussians=15, contraction_factor=5., populations_plot=True, nn=50, metric='euclidean', HDBSCAN_merging_parameter=0.1, reclustering_step=False, p_val_basic_threshold = 0.05, load_embed=False, load_db=False, load_clusters=False, base_folder='./', save_plots=True, verbose=False)___:
-        
-        
+
+
 BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.org/10.3390/e25020354.  
-        
+
 1. __original_db__ _(pandas DataFrame, n_cells x n_features shaped)_: data on which to perform the analysis, with units (e.g., cells) on rows and features (e.g. features) on columns. This variable will remain untouched, and will be used at the end for statistical comparisons.
 2. __pos__ _(pandas DataFrame, n_cells x 2 shaped)_: spatial positional features for your units (e.g. x,y columns for real space coordinates).
 3. __reference__ _(pandas DataFrame, n_features x n_properties shaped)_: DataFrame where every row must correspond to a different feature and every column should provide a different property of such feature, few columns are mandatory, like corresponding_column, naming_column, interpretative_column and importance_column, see below for further details.
@@ -79,7 +79,7 @@ BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.o
 
 
 
-#####___custom_colormap_for_many_clusters(self, n_clusters=None, random_seed=42, bright_threshold=0.2)___:
+##### ___custom_colormap_for_many_clusters(self, n_clusters=None, random_seed=42, bright_threshold=0.2)___:
 
 New colormap to deal properly with 20+ clusters scenarios.
 
