@@ -71,7 +71,7 @@ BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.o
 24. __base_folder__ _(str)_: root folder from which the analysis tree will start and be performed, within this folder plots and results will e stored in appropriate subfolders.
 25. __save_plots__ _(boolean)_: whether or not to store the produced plots.
 26. __verbose__ _(boolean)_: whether or not to obtain a more verbose output.
-
+\n\n\n\n\n
 
 
 
