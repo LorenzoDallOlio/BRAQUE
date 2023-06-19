@@ -40,23 +40,16 @@ This section explains the python class installed and imported with standard proc
 
 ### The BRAQUE class
 
-class constructor(self, original_db, pos, reference, correspondence_column, 
-                 naming_column, interpretative_column, importance_column,
-                 features_subgroup='', area='dataset', perform_features_selection=True, 
-                 perform_lognormal_shrinkage=True, subsampling=1, max_n_gaussians=15,
-                 contraction_factor=5., populations_plot=True, nn=50, metric='euclidean', 
-                 HDBSCAN_merging_parameter=0.1, reclustering_step=False, 
-                 p_val_basic_threshold = 0.05, load_embed=False, load_db=False,
-                 load_clusters=False, base_folder='./', save_plots=True, verbose=False):
+___class constructor (self, original_db, pos, reference, correspondence_column, naming_column, interpretative_column, importance_column, features_subgroup='', area='dataset', perform_features_selection=True, perform_lognormal_shrinkage=True, subsampling=1, max_n_gaussians=15, contraction_factor=5., populations_plot=True, nn=50, metric='euclidean', HDBSCAN_merging_parameter=0.1, reclustering_step=False, p_val_basic_threshold = 0.05, load_embed=False, load_db=False, load_clusters=False, base_folder='./', save_plots=True, verbose=False)___:
         
         
 BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.org/10.3390/e25020354.  
         
-original_db (pandas DataFrame, n_cells x n_features shaped): data on which to perform the analysis, with units (e.g., cells) on rows and features (e.g. features) on columns. This variable will remain untouched, and will be used at the end for statistical comparisons.
-pos (pandas DataFrame, n_cells x 2 shaped): spatial positional features for your units (e.g. x,y columns for real space coordinates).
-reference (pandas DataFrame, n_features x n_properties shaped): DataFrame where every row must correspond to a different feature and every column should provide a different property of such feature, few columns are mandatory, like corresponding_column, naming_column, interpretative_column and importance_column, see below for further details.
-correspondence_column (str): header of the reference file column which contains features names, may contain multiple variants in the format "variant1/variant2/.../variantN".
-naming_column (str): header of the reference file column which contains features names that shall be used in plots/results.
+1. __original_db__ _(pandas DataFrame, n_cells x n_features shaped)_: data on which to perform the analysis, with units (e.g., cells) on rows and features (e.g. features) on columns. This variable will remain untouched, and will be used at the end for statistical comparisons.
+2. __pos__ _(pandas DataFrame, n_cells x 2 shaped)_: spatial positional features for your units (e.g. x,y columns for real space coordinates).
+3. __reference__ _(pandas DataFrame, n_features x n_properties shaped)_: DataFrame where every row must correspond to a different feature and every column should provide a different property of such feature, few columns are mandatory, like corresponding_column, naming_column, interpretative_column and importance_column, see below for further details.
+4. __correspondence_column__ _(str)_: header of the reference file column which contains features names, may contain multiple variants in the format "variant1/variant2/.../variantN".
+5. __naming_column__ _(str)_: header of the reference file column which contains features names that shall be used in plots/results.
 interpretative_column (str): header of the reference file column which contains features associated property.
 importance_column (str): header of the reference file column which contains 1 for important features that should be used for summary plot.
 features_subgroup (str): optional header of the reference file column which might opionally be used to keep only a subset of features. if used shall be a 0/1 coded column, with 1 for keeping the feature at that specific row, or 0 to exlude it. use an empty string ("") to avoid such subselection.
