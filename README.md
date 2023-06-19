@@ -20,6 +20,12 @@ To cherry-pick functions from BRAQUE and reproduce our paper results check the [
 
 <br><br>
 
+## How to cite BRAQUE
+
+
+Dall'Olio L, Bolognesi M, Borghesi S, Cattoretti G, Castellani G. BRAQUE: Bayesian Reduction for Amplified Quantization in UMAP Embedding. Entropy (Basel). 2023 Feb 14;25(2):354. doi: 10.3390/e25020354. PMID: 36832720; PMCID: PMC9955093.
+
+<br><br>
 
 ## General Introduction
 
