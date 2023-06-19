@@ -562,7 +562,7 @@ class BRAQUE():
 
         \nnn (integer): number of nearest neighbors to use during UMAP
         \nmetric (str, one of scipy-allowed distances): which metric to use during UMAP algorithm
-        \nsave_embed: whether or not to save the resulting coordinates in the embedding space.
+        \nsave_embed (boolean): whether or not to save the resulting coordinates in the embedding space.
 
         """
 
@@ -916,7 +916,7 @@ class BRAQUE():
         \nlegend_size (positive float): size for the dots in the legend
         \nplot_with_legend (bool): whether or not to make the 2 plots with legends (may be unreadable if too many clusters/too long labels are used)
         \nplot_without_legend (bool): whether or not to make the 2 plots without legends (useful if with legends the plot are unreadable, please notice that this parameter is not mandatory to be opposite to 'plot_with_legend')
-        \plot_noise (bool) whether or not to plot the noise cluster if found by HDBSCAN
+        \nplot_noise (bool): whether or not to plot the noise cluster if found by HDBSCAN
 
         """
         
