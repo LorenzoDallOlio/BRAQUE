@@ -14,6 +14,15 @@ You can find the BRAQUE paper here for further details: https://doi.org/10.3390/
 
 
 
+## Installation
+
+to download and use braque we suggest making it in a separate enviroment, install pip and then run
+
+```
+pip install -i https://test.pypi.org/simple/ braque
+```
+to download the latest version of BRAQUE
+
 
 ## How to use BRAQUE?
 
