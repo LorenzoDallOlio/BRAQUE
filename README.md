@@ -18,6 +18,7 @@ If you use part of BRAQUE code please cite our paper, together with the 3 main r
 To understand BRAQUE's class check the [BRAQUE-standard](#BRAQUE-standard) section.
 To cherry-pick functions from BRAQUE and reproduce our paper results check the [BRAQUE-legacy](#BRAQUE-legacy) section.
 
+<br><br>
 
 
 ## General Introduction
@@ -29,6 +30,7 @@ Then these candidate subpopulations are separated, embedded with the UMAP[^1] al
 Lastly, a robust measure of effect size[^3] is computed to estimate which markers are more characteristic for every cluster, and many summarizing plots can be performed.
 
 
+<br><br>
 
 ## Installation
 
@@ -39,6 +41,8 @@ pip install -i https://test.pypi.org/simple/ braque
 ```
 to download the latest version of BRAQUE
 
+<br><br>
+<br><br>
 
 
 ## BRAQUE-standard
@@ -54,10 +58,10 @@ This section explains the python class installed and imported with standard proc
 
 ### The BRAQUE class
 
-___class constructor (self, original_db, pos, reference, correspondence_column, naming_column, interpretative_column, importance_column, features_subgroup='', area='dataset', perform_features_selection=True, perform_lognormal_shrinkage=True, subsampling=1, max_n_gaussians=15, contraction_factor=5., populations_plot=True, nn=50, metric='euclidean', HDBSCAN_merging_parameter=0.1, reclustering_step=False, p_val_basic_threshold = 0.05, load_embed=False, load_db=False, load_clusters=False, base_folder='./', save_plots=True, verbose=False)___:
+___\_\_init\_\_(self, original_db, pos, reference, correspondence_column, naming_column, interpretative_column, importance_column, features_subgroup='', area='dataset', perform_features_selection=True, perform_lognormal_shrinkage=True, subsampling=1, max_n_gaussians=15, contraction_factor=5., populations_plot=True, nn=50, metric='euclidean', HDBSCAN_merging_parameter=0.1, reclustering_step=False, p_val_basic_threshold = 0.05, load_embed=False, load_db=False, load_clusters=False, base_folder='./', save_plots=True, verbose=False)___:
 
 
-BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.org/10.3390/e25020354.  
+Class constructor for BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.org/10.3390/e25020354.  
 
 1. __original_db__ _(pandas DataFrame, n_cells x n_features shaped)_: data on which to perform the analysis, with units (e.g., cells) on rows and features (e.g. features) on columns. This variable will remain untouched, and will be used at the end for statistical comparisons.
 2. __pos__ _(pandas DataFrame, n_cells x 2 shaped)_: spatial positional features for your units (e.g. x,y columns for real space coordinates).
