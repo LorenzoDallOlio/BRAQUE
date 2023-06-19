@@ -71,15 +71,14 @@ BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.o
 24. __base_folder__ _(str)_: root folder from which the analysis tree will start and be performed, within this folder plots and results will e stored in appropriate subfolders.
 25. __save_plots__ _(boolean)_: whether or not to store the produced plots.
 26. __verbose__ _(boolean)_: whether or not to obtain a more verbose output.
-\n\n\n\n\n
+</br>
 
 
 
 
 
 
-
-##### ___custom_colormap_for_many_clusters(self, n_clusters=None, random_seed=42, bright_threshold=0.2)___:
+___custom_colormap_for_many_clusters(self, n_clusters=None, random_seed=42, bright_threshold=0.2)___:
 
 New colormap to deal properly with 20+ clusters scenarios.
 
@@ -87,7 +86,7 @@ New colormap to deal properly with 20+ clusters scenarios.
 2. __random_seed__ _(integer)_: random seed for color order, different seeds will give different color orders
 3. bright_threshold__ _(float, between 0 an 1)_: value used to discard shades of white and very bright colors, the higher the less colors will be used for the colormap
 
-
+</br>
 
 
 
@@ -102,7 +101,7 @@ Substitutes columns names with pre-defined standard names contained in reference
 
 
 
-
+</br>
 
 
 
@@ -114,7 +113,7 @@ Add inplace to input pandas dataframe the column 'MainFeatures' and a column wit
 1. __find_n__ _(positive integer)_: how many main features to find, at most
 2. __undef_thr__ _(non-negative float): threshold below which an effect size is never considered relevant
 
-
+</br>
 
 
 
@@ -132,7 +131,7 @@ Perform features selection over a dataframe, given a reference file on which col
 
 
 
-
+</br>
 
 
 
