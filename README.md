@@ -45,32 +45,32 @@ ___class constructor (self, original_db, pos, reference, correspondence_column, 
         
 BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.org/10.3390/e25020354.  
         
-1. __original_db__ _(pandas DataFrame, n_cells x n_features shaped)_: data on which to perform the analysis, with units (e.g., cells) on rows and features (e.g. features) on columns. This variable will remain untouched, and will be used at the end for statistical comparisons.
-2. __pos__ _(pandas DataFrame, n_cells x 2 shaped)_: spatial positional features for your units (e.g. x,y columns for real space coordinates).
-3. __reference__ _(pandas DataFrame, n_features x n_properties shaped)_: DataFrame where every row must correspond to a different feature and every column should provide a different property of such feature, few columns are mandatory, like corresponding_column, naming_column, interpretative_column and importance_column, see below for further details.
-4. __correspondence_column__ _(str)_: header of the reference file column which contains features names, may contain multiple variants in the format "variant1/variant2/.../variantN".
-5. __naming_column__ _(str)_: header of the reference file column which contains features names that shall be used in plots/results.
-6. __interpretative_column__ _(str)_: header of the reference file column which contains features associated property.
-7. __importance_column__ _(str)_: header of the reference file column which contains 1 for important features that should be used for summary plot.
-8. __features_subgroup__ _(str)_: optional header of the reference file column which might opionally be used to keep only a subset of features. if used shall be a 0/1 coded column, with 1 for keeping the feature at that specific row, or 0 to exlude it. use an empty string ("") to avoid such subselection.
-9. __area__ _(str)_: string that will be used for naming the folders and plots correspond to the current dataset/analysis.
-10. __perform_feature_selection__ _(boolean)_: whether or not to perform features selection.
-11: __perform_lognormal_shrinkage__ _(boolean)_: whether or not to perform lognormal shrinkage (preprocessing from Dall'Olio et al.).
-12. __subsampling__ _(integer, between 1 and len(db))_: subsampling parameter, take 1 cell every N. in order to speed up gaussian mixture fitting procedure
-13. __max_n_gaussians__ _(positive integer, >=2)_: maximum number of fittable lognormal distributions for a single feature, keep in mind that the higher the slower and more precise the algorithm. To tune follow guidelines from Dall'Olio et al.
-14. __contraction_factor__ _(positive float, >1.)_: each gaussian in the log2 space is contracted by this factor to better separate candidate subpopulations. To tune follow guidelines from Dall'Olio et al.
-15. __populations_plot__ _(boolean)_: whether or not to plot the final summary about number of candidates subpopulations for each feature, useful to tune max_n_gaussians.
-16. __nn__ _(integer)_: number of nearest neighbors to use during UMAP
-17. __metric__ _(str, one of scipy-allowed distances)_: which metric to use during UMAP algorithm
-18. __HDBSCAN_merging_parameter__ _(float, non-negative)_: corresponds to 'cluster_selection_epsilon' of the HDBSCAN algorithm.
-19. __reclustering_step__ _(boolean)_: whether or not to perform a second HDBSCAN clustering on the biggest cluster to unpack eventual superclusters that may form in immunofluorescence context, do not use if you are not sure.
-20. __p_val_basic_threshold__ _(float, between 0 and 1 excluded)_: which interpretative_column threshold should be adopted for a single test, such threshold will be bonferroni corrected for multiple tests scenarios.
-21. __load_embed__ _(boolean)_: whether or not to load precomputed embedding from the /embeddings/ subfolder.
-22. __load_db__ _(boolean)_: whether or not to load precomputed processed db from the /quantized_dbs/ subfolder. 
-23. __load_clusters__ _(boolean)_: whether or not to load precomputed clusters from the /results/area/ subfolder.
-24. __base_folder__ _(str)_: root folder from which the analysis tree will start and be performed, within this folder plots and results will e stored in appropriate subfolders.
-25. __save_plots__ _(boolean)_: whether or not to store the produced plots.
-26. __verbose__ _(boolean)_: whether or not to obtain a more verbose output.
+. __original_db__ _(pandas DataFrame, n_cells x n_features shaped)_: data on which to perform the analysis, with units (e.g., cells) on rows and features (e.g. features) on columns. This variable will remain untouched, and will be used at the end for statistical comparisons.
+. __pos__ _(pandas DataFrame, n_cells x 2 shaped)_: spatial positional features for your units (e.g. x,y columns for real space coordinates).
+. __reference__ _(pandas DataFrame, n_features x n_properties shaped)_: DataFrame where every row must correspond to a different feature and every column should provide a different property of such feature, few columns are mandatory, like corresponding_column, naming_column, interpretative_column and importance_column, see below for further details.
+. __correspondence_column__ _(str)_: header of the reference file column which contains features names, may contain multiple variants in the format "variant1/variant2/.../variantN".
+. __naming_column__ _(str)_: header of the reference file column which contains features names that shall be used in plots/results.
+. __interpretative_column__ _(str)_: header of the reference file column which contains features associated property.
+. __importance_column__ _(str)_: header of the reference file column which contains 1 for important features that should be used for summary plot.
+. __features_subgroup__ _(str)_: optional header of the reference file column which might opionally be used to keep only a subset of features. if used shall be a 0/1 coded column, with 1 for keeping the feature at that specific row, or 0 to exlude it. use an empty string ("") to avoid such subselection.
+. __area__ _(str)_: string that will be used for naming the folders and plots correspond to the current dataset/analysis.
+. __perform_feature_selection__ _(boolean)_: whether or not to perform features selection.
+. __perform_lognormal_shrinkage__ _(boolean)_: whether or not to perform lognormal shrinkage (preprocessing from Dall'Olio et al.).
+. __subsampling__ _(integer, between 1 and len(db))_: subsampling parameter, take 1 cell every N. in order to speed up gaussian mixture fitting procedure
+. __max_n_gaussians__ _(positive integer, >=2)_: maximum number of fittable lognormal distributions for a single feature, keep in mind that the higher the slower and more precise the algorithm. To tune follow guidelines from Dall'Olio et al.
+. __contraction_factor__ _(positive float, >1.)_: each gaussian in the log2 space is contracted by this factor to better separate candidate subpopulations. To tune follow guidelines from Dall'Olio et al.
+. __populations_plot__ _(boolean)_: whether or not to plot the final summary about number of candidates subpopulations for each feature, useful to tune max_n_gaussians.
+. __nn__ _(integer)_: number of nearest neighbors to use during UMAP
+. __metric__ _(str, one of scipy-allowed distances)_: which metric to use during UMAP algorithm
+. __HDBSCAN_merging_parameter__ _(float, non-negative)_: corresponds to 'cluster_selection_epsilon' of the HDBSCAN algorithm.
+. __reclustering_step__ _(boolean)_: whether or not to perform a second HDBSCAN clustering on the biggest cluster to unpack eventual superclusters that may form in immunofluorescence context, do not use if you are not sure.
+. __p_val_basic_threshold__ _(float, between 0 and 1 excluded)_: which interpretative_column threshold should be adopted for a single test, such threshold will be bonferroni corrected for multiple tests scenarios.
+. __load_embed__ _(boolean)_: whether or not to load precomputed embedding from the /embeddings/ subfolder.
+. __load_db__ _(boolean)_: whether or not to load precomputed processed db from the /quantized_dbs/ subfolder. 
+. __load_clusters__ _(boolean)_: whether or not to load precomputed clusters from the /results/area/ subfolder.
+. __base_folder__ _(str)_: root folder from which the analysis tree will start and be performed, within this folder plots and results will e stored in appropriate subfolders.
+. __save_plots__ _(boolean)_: whether or not to store the produced plots.
+. __verbose__ _(boolean)_: whether or not to obtain a more verbose output.
 
 
 
