@@ -463,11 +463,11 @@ For questions regarding BRAQUE feel free to contact me at "lorenzo.dallolio4@uni
 
 ## References
 
-Dimensionality Reduction:
+1. Dimensionality Reduction:
 [^1]: McInnes, L, Healy, J, UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction, ArXiv e-prints 1802.03426, 2018
 
-Clustering:
+2. Clustering:
 [^2]: Campello, R.J.G.B., Moulavi, D., Sander, J. (2013). Density-Based Clustering Based on Hierarchical Density Estimates. In: Pei, J., Tseng, V.S., Cao, L., Motoda, H., Xu, G. (eds) Advances in Knowledge Discovery and Data Mining. PAKDD 2013. Lecture Notes in Computer Science(), vol 7819. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-642-37456-2_14
 
-Robust effect size index:
+3. Robust effect size index:
 [^3]: Vandekar, S., Tao, R., & Blume, J. (2020). A Robust Effect Size Index. Psychometrika, 85(1), 232–246. https://doi.org/10.1007/s11336-020-09698-2
