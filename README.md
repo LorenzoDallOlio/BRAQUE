@@ -79,7 +79,7 @@ BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.o
 
 
 
-#######___custom_colormap_for_many_clusters(self, n_clusters=None, random_seed=42, bright_threshold=0.2)___:
+#####___custom_colormap_for_many_clusters(self, n_clusters=None, random_seed=42, bright_threshold=0.2)___:
 
 New colormap to deal properly with 20+ clusters scenarios.
 
