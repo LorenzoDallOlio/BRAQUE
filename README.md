@@ -455,10 +455,14 @@ The main pipeline can be summarized as follows:
 All plots and partial results to load are stored by default in repositories created within the working directory.
 
 
+<br><br>
+
 
 ## Contacts
 
-For questions regarding BRAQUE feel free to contact me at "lorenzo.dallolio4@unibo.it" or "lorenzo.dallolio@studio.unibo.it"
+For questions regarding BRAQUE feel free to contact Lorenzo Dall'Olio at "lorenzo.dallolio4@unibo.it" or "lorenzo.dallolio@studio.unibo.it"
+
+<br><br>
 
 
 ## References
