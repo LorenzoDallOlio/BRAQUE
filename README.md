@@ -11,6 +11,10 @@ Lastly, a robust measure of effect size[^3] is computed to estimate which marker
 
 You can find the BRAQUE paper here for further details: https://doi.org/10.3390/e25020354
 
+If you use part of BRAQUE code please cite our paper, together with the 3 main references, depending on which part of the pipeline you used.
+
+To understand BRAQUE's workflow check the [BRAQUE-standard](#BRAQUE-standard) section.
+To cherry-pick functions from BRAQUE and reproduce our paper results check the [BRAQUE-legacy](#BRAQUE-legacy) section.
 
 
 
@@ -24,21 +28,78 @@ pip install -i https://test.pypi.org/simple/ braque
 to download the latest version of BRAQUE
 
 
-## How to use BRAQUE?
+
+## BRAQUE-standard
+
+### how to use BRAQUE-standard?
+
+The idea behind this section is to provide you with a deep explanation of the BRAQUE class and the easy-to-use examples.
+
+This section explains the python class installed and imported with standard procedure, and shows an example of usage for such class, which can be found within the examples directory on github (https://github.com/LorenzoDallOlio/BRAQUE/tree/main/examples) with the name BRAQUE-usage (you can find both a notebook and a python script) together with 3 toy dataset needed to run the examples (original_db-toy.csv, postions-toy.csv, and reference-toy.csv). Just download them, install braque, place them in a directory and run the script/notebook to check BRAQUE results/inputs/plots/etc.
+
+
+### The BRAQUE class
+
+class constructor(self, original_db, pos, reference, correspondence_column, 
+                 naming_column, interpretative_column, importance_column,
+                 features_subgroup='', area='dataset', perform_features_selection=True, 
+                 perform_lognormal_shrinkage=True, subsampling=1, max_n_gaussians=15,
+                 contraction_factor=5., populations_plot=True, nn=50, metric='euclidean', 
+                 HDBSCAN_merging_parameter=0.1, reclustering_step=False, 
+                 p_val_basic_threshold = 0.05, load_embed=False, load_db=False,
+                 load_clusters=False, base_folder='./', save_plots=True, verbose=False):
+        
+        
+BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.org/10.3390/e25020354.  
+        
+original_db (pandas DataFrame, n_cells x n_features shaped): data on which to perform the analysis, with units (e.g., cells) on rows and features (e.g. features) on columns. This variable will remain untouched, and will be used at the end for statistical comparisons.
+pos (pandas DataFrame, n_cells x 2 shaped): spatial positional features for your units (e.g. x,y columns for real space coordinates).
+reference (pandas DataFrame, n_features x n_properties shaped): DataFrame where every row must correspond to a different feature and every column should provide a different property of such feature, few columns are mandatory, like corresponding_column, naming_column, interpretative_column and importance_column, see below for further details.
+correspondence_column (str): header of the reference file column which contains features names, may contain multiple variants in the format "variant1/variant2/.../variantN".
+naming_column (str): header of the reference file column which contains features names that shall be used in plots/results.
+interpretative_column (str): header of the reference file column which contains features associated property.
+importance_column (str): header of the reference file column which contains 1 for important features that should be used for summary plot.
+features_subgroup (str): optional header of the reference file column which might opionally be used to keep only a subset of features. if used shall be a 0/1 coded column, with 1 for keeping the feature at that specific row, or 0 to exlude it. use an empty string ("") to avoid such subselection.
+area (str): string that will be used for naming the folders and plots correspond to the current dataset/analysis.
+perform_feature_selection (boolean): whether or not to perform features selection.
+perform_lognormal_shrinkage (boolean): whether or not to perform lognormal shrinkage (preprocessing from Dall'Olio et al.).
+subsampling (integer, between 1 and len(db)): subsampling parameter, take 1 cell every N. in order to speed up gaussian mixture fitting procedure
+max_n_gaussians (positive integer, >=2): maximum number of fittable lognormal distributions for a single feature, keep in mind that the higher the slower and more precise the algorithm. To tune follow guidelines from Dall'Olio et al.
+contraction_factor (positive float, >1.): each gaussian in the log2 space is contracted by this factor to better separate candidate subpopulations. To tune follow guidelines from Dall'Olio et al.
+populations_plot (boolean): whether or not to plot the final summary about number of candidates subpopulations for each feature, useful to tune max_n_gaussians.
+nn (integer): number of nearest neighbors to use during UMAP
+metric (str, one of scipy-allowed distances): which metric to use during UMAP algorithm
+HDBSCAN_merging_parameter (float, non-negative): corresponds to 'cluster_selection_epsilon' of the HDBSCAN algorithm.
+reclustering_step (boolean): whether or not to perform a second HDBSCAN clustering on the biggest cluster to unpack eventual superclusters that may form in immunofluorescence context, do not use if you are not sure.
+p_val_basic_threshold (float, between 0 and 1 excluded): which interpretative_column threshold should be adopted for a single test, such threshold will be bonferroni corrected for multiple tests scenarios.
+load_embed (boolean): whether or not to load precomputed embedding from the /embeddings/ subfolder.
+load_db (boolean): whether or not to load precomputed processed db from the /quantized_dbs/ subfolder. 
+load_clusters (boolean): whether or not to load precomputed clusters from the /results/area/ subfolder.
+base_folder (str): root folder from which the analysis tree will start and be performed, within this folder plots and results will e stored in appropriate subfolders.
+save_plots (boolean): whether or not to store the produced plots.
+verbose (boolean): whether or not to obtain a more verbose output.
+
+
+
+
+
+## BRAQUE-legacy
+
+### How to use BRAQUE-legacy?
+
 
 The idea of this section is explaining you the functions and how to use them, in order to let you combine them as you prefer if you want to try BRAQUE or some parts of it.
 
-If you use part of BRAQUE code please cite our paper, together with the 3 main references, depending on which part of the pipeline you used.
+within the examples directory on github (https://github.com/LorenzoDallOlio/BRAQUE/tree/main/examples) you can find both a notebook and a python script named BRAQUE-legacy. This section explains them.
 
-At the moment BRAQUE is undergoing further developments, and will probably change to a class suitable for different and broader uses. At the moment you are provided with the version 0.1.0 which is reported here both in .ipynb and .py formats.
-These versions are provided in order to reproduce the results obtained in the published the paper over the publicly available datasets we provided ( http://dx.doi.org/10.17632/j8xbwb93x9.1), and therefore they both consist of a code which is ready to run on a specific kind of dataset, and should/could be adjusted to your needs for different datasets.
+This version is provided in order to reproduce the results obtained in the published the paper over the publicly available datasets we provided (http://dx.doi.org/10.17632/j8xbwb93x9.1), and therefore they both consist of a code which is ready to run on a specific kind of dataset, and should/could be adjusted to your needs for different datasets.
 
 To prepare everthing you can install the dependencies in the requirements.txt file, but feel free to change versions as long as the algorithm runs till the end it should have worked properly.
 You can use _'conda install requirements.txt'_ or _'pip install -r requirements.txt'_ for this task.
 
 
 
-### Input Data
+#### Input Data
 
 The essential elements to properly run BRAQUE are the following variables:
 
@@ -58,7 +119,7 @@ Please notice that in our paper specific code we used original_db with 3 more co
 
 
 
-### Setup script parameters
+#### Setup script parameters
 
 At the begin of the script there are some further parameters you can play with. This organization will be moved in a class constructor, but as previously mentioned the paper specific code is maintained as untouched as possible to reproduce paper results. The important parameters to set are:
 1. __output_file__: string, file path where to store printed outputs in a text file
@@ -87,7 +148,7 @@ All global parameters are provided with a default value, for suggestion on value
 
 
 
-### Functions
+#### Functions
 
 
 1. Utility functions:
@@ -127,7 +188,7 @@ Please notice that the tag ___\<specific for the paper\>___ is referred to porti
 
 
 
-### Pipeline order
+#### Pipeline order
 
 
 The main pipeline can be summarized as follows:
