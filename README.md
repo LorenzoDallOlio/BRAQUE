@@ -29,6 +29,20 @@ to download the latest version of BRAQUE
 
 
 
+## Lazy users Guide
+
+Just install braque with `pip install -i https://test.pypi.org/simple/ braque`, we suggest to do so in an empty enviroment.
+Then download the examples folder at https://github.com/LorenzoDallOlio/BRAQUE/tree/main/examples, and see if you can run BRAQUE-usage.py (it should take around a minute the whole procedure.
+
+Then replace the mòandatory things with your tidy data (original_db.csv, positions.csv, reference.csv, and edit the strings in the BRAQUE-usage.py accordingly).
+
+The basic usage is passing every argument to the class constructor, and then simply run ___self.run_pipeline()___ from the constructed object, or single parts of the pipeline if you want so.
+
+If you wish there is also a python notebook version of BRAQUE-usage. For further boring details check the following sections
+
+
+
+
 ## BRAQUE-standard
 
 ### how to use BRAQUE-standard?
@@ -36,6 +50,8 @@ to download the latest version of BRAQUE
 The idea behind this section is to provide you with a deep explanation of the BRAQUE class and the easy-to-use examples.
 
 This section explains the python class installed and imported with standard procedure, and shows an example of usage for such class, which can be found within the examples directory on github (https://github.com/LorenzoDallOlio/BRAQUE/tree/main/examples) with the name BRAQUE-usage (you can find both a notebook and a python script) together with 3 toy dataset needed to run the examples (original_db-toy.csv, postions-toy.csv, and reference-toy.csv). Just download them, install braque, place them in a directory and run the script/notebook to check BRAQUE results/inputs/plots/etc.
+
+
 
 
 ### The BRAQUE class
@@ -71,7 +87,7 @@ BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.o
 24. __base_folder__ _(str)_: root folder from which the analysis tree will start and be performed, within this folder plots and results will e stored in appropriate subfolders.
 25. __save_plots__ _(boolean)_: whether or not to store the produced plots.
 26. __verbose__ _(boolean)_: whether or not to obtain a more verbose output.
-</br>
+</br></br></br>
 
 
 
@@ -86,8 +102,7 @@ New colormap to deal properly with 20+ clusters scenarios.
 2. __random_seed__ _(integer)_: random seed for color order, different seeds will give different color orders
 3. bright_threshold__ _(float, between 0 an 1)_: value used to discard shades of white and very bright colors, the higher the less colors will be used for the colormap
 
-</br>
-
+</br></br></br>
 
 
 
@@ -101,7 +116,7 @@ Substitutes columns names with pre-defined standard names contained in reference
 
 
 
-</br>
+</br></br></br>
 
 
 
@@ -113,7 +128,7 @@ Add inplace to input pandas dataframe the column 'MainFeatures' and a column wit
 1. __find_n__ _(positive integer)_: how many main features to find, at most
 2. __undef_thr__ _(non-negative float): threshold below which an effect size is never considered relevant
 
-</br>
+</br></br></br>
 
 
 
@@ -131,7 +146,7 @@ Perform features selection over a dataframe, given a reference file on which col
 
 
 
-</br>
+</br></br></br>
 
 
 
@@ -147,6 +162,7 @@ Perform Lognormal Shrinkage preprocessing over a pandas datafame.
 5. __populations_plot__ _(boolean)_: whether or not to plot the final summary about number of candidates subpopulations for each feature, useful to tune max_n_gaussians.
 
 
+</br></br></br>
 
 
 
@@ -162,6 +178,7 @@ Perform the embedding on a 2D manifold of a pandas dataframe using the UMAP algo
 3. __save_embed__ _(boolean)_: whether or not to save the resulting coordinates in the embedding space.
 
 
+</br></br></br>
 
 
 
@@ -179,6 +196,7 @@ Compute features importance within each cluster.
 
 
 
+</br></br></br>
 
 
 
@@ -193,6 +211,7 @@ Horizontal bar plot with highest effect size features for a given cluster.
 5. __path__ _(str)_: where to store the resulting plot (if saved)
 
 
+</br></br></br>
 
 
 
@@ -207,6 +226,7 @@ Summary plot for all features.
 
 
 
+</br></br></br>
 
 
 
@@ -221,6 +241,7 @@ Plot HDBSCAN clusters onto real space and UMAP embedding coordinates with approp
 
 
 
+</br></br></br>
 
 
 
@@ -239,6 +260,7 @@ Plot a Maximum of 4 plots (2 with legend and 2 without legend) which summarize t
 
 
 
+</br></br></br>
 
 
 
@@ -249,6 +271,7 @@ Find which features are the main ones accoring to self.importance_column.
 
 
 
+</br></br></br>
 
 
 
@@ -265,6 +288,7 @@ Plot cluster position in UMAP embedding and in real space, together with a summa
 
 
 
+</br></br></br>
 
 
 
@@ -284,6 +308,7 @@ Plot Kernel Density Estimation to compare a cluster with whole dataset using som
 
 
 
+</br></br></br>
 
 
 
@@ -293,12 +318,19 @@ Run the complete BRAQUE pipeline from preprocessing to plots and storing results
 
 
 
+</br></br></br>
 
 
 
+### BRAQUE usage
+
+From the examples folder on github (https://github.com/LorenzoDallOlio/BRAQUE/tree/main/examples) download the script and the .csv files. Then you should have everything ready after braque installation, just try to run the script.
+
+The basic usage is to call the class constructor with the desired parameters and datasets, and lastly call the ___self.run_pipeline()___ method of the built object. Then just by substituting the dataset with your own everything should be ready, please notice file formats and shapes to be coherent with toy datasets, as well as substituing with the new correct headers the parameters ___self.interpretative_column___, ___self.correspondence_column___, ___self.naming_column___, and ___self.importance_column___ at least.
 
 
-
+</br></br></br>
+</br></br></br>
 
 
 
