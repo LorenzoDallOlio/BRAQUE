@@ -1,34 +1,6 @@
 # BRAQUE: Bayesian Reduction for Amplified Quantization in UMAP Embedding
 
 
-## General Introduction
-
-BRAQUE is a pipeline for clustering high dimensional data, specifically it was built for and tested on proteomics data acquired through immunofluorescence technique.
-
-In brief, BRAQUE uses a new preprocessing techinque, called Lognormal Shrinkage, to estimate candidate subpopulations within each marker distribution. 
-Then these candidate subpopulations are separated, embedded with the UMAP[^1] algorithm, and clustered with one or two iterations of the HDBSCAN[^2] algorithm. 
-Lastly, a robust measure of effect size[^3] is computed to estimate which markers are more characteristic for every cluster, and many summarizing plots can be performed.
-
-You can find the BRAQUE paper here for further details: https://doi.org/10.3390/e25020354
-
-If you use part of BRAQUE code please cite our paper, together with the 3 main references, depending on which part of the pipeline you used.
-
-To understand BRAQUE's workflow check the [BRAQUE-standard](#BRAQUE-standard) section.
-To cherry-pick functions from BRAQUE and reproduce our paper results check the [BRAQUE-legacy](#BRAQUE-legacy) section.
-
-
-
-## Installation
-
-to download and use braque we suggest making it in a separate enviroment, install pip and then run
-
-```
-pip install -i https://test.pypi.org/simple/ braque
-```
-to download the latest version of BRAQUE
-
-
-
 ## Lazy users Guide
 
 Just install braque with `pip install -i https://test.pypi.org/simple/ braque`, we suggest to do so in an empty enviroment.
@@ -40,6 +12,32 @@ The basic usage is passing every argument to the class constructor, and then sim
 
 If you wish there is also a python notebook version of BRAQUE-usage. For further boring details check the following sections
 
+You can find the BRAQUE paper here for further details: https://doi.org/10.3390/e25020354
+If you use part of BRAQUE code please cite our paper, together with the 3 main references, depending on which part of the pipeline you used.
+
+To understand BRAQUE's class check the [BRAQUE-standard](#BRAQUE-standard) section.
+To cherry-pick functions from BRAQUE and reproduce our paper results check the [BRAQUE-legacy](#BRAQUE-legacy) section.
+
+
+
+## General Introduction
+
+BRAQUE is a pipeline for clustering high dimensional data, specifically it was built for and tested on proteomics data acquired through immunofluorescence technique.
+
+In brief, BRAQUE uses a new preprocessing techinque, called Lognormal Shrinkage, to estimate candidate subpopulations within each marker distribution. 
+Then these candidate subpopulations are separated, embedded with the UMAP[^1] algorithm, and clustered with one or two iterations of the HDBSCAN[^2] algorithm. 
+Lastly, a robust measure of effect size[^3] is computed to estimate which markers are more characteristic for every cluster, and many summarizing plots can be performed.
+
+
+
+## Installation
+
+to download and use braque we suggest making it in a separate enviroment, install pip and then run
+
+```
+pip install -i https://test.pypi.org/simple/ braque
+```
+to download the latest version of BRAQUE
 
 
 
