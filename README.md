@@ -74,6 +74,11 @@ BRAQUE object to perform the pipeline reported in Dall'Olio et al. https://doi.o
 
 
 
+
+
+
+
+
 ___custom_colormap_for_many_clusters(self, n_clusters=None, random_seed=42, bright_threshold=0.2)___:
 
 New colormap to deal properly with 20+ clusters scenarios.
@@ -81,6 +86,11 @@ New colormap to deal properly with 20+ clusters scenarios.
 1. __n_clusters__ _(integer)_: number of clusters, each of which will correspond to a color in the resulting output
 2. __random_seed__ _(integer)_: random seed for color order, different seeds will give different color orders
 3. bright_threshold__ _(float, between 0 an 1)_: value used to discard shades of white and very bright colors, the higher the less colors will be used for the colormap
+
+
+
+
+
 
 
 
@@ -92,12 +102,22 @@ Substitutes columns names with pre-defined standard names contained in reference
 
 
 
+
+
+
+
+
 ___add_main_features_interpretative_columns(self, find_n=3, undef_thr=0.)__:
 
 Add inplace to input pandas dataframe the column 'MainFeatures' and a column with their interpretation.
 
 1. __find_n__ _(positive integer)_: how many main features to find, at most
 2. __undef_thr__ _(non-negative float): threshold below which an effect size is never considered relevant
+
+
+
+
+
 
 
 
@@ -112,7 +132,12 @@ Perform features selection over a dataframe, given a reference file on which col
 
 
 
-___lognormal_shrinkage(self, subsampling=1, max_n_gaussians=20, log_transform=True, contraction_factor=5., populations_plot=False):
+
+
+
+
+
+___lognormal_shrinkage(self, subsampling=1, max_n_gaussians=20, log_transform=True, contraction_factor=5., populations_plot=False)___:
 
 Perform Lognormal Shrinkage preprocessing over a pandas datafame.
 
@@ -121,6 +146,11 @@ Perform Lognormal Shrinkage preprocessing over a pandas datafame.
 3. __log_transform__ _(boolean)_: whether to do a lognormal mixture (suggested if data are not very multi gaussian) or a gaussian mixture.
 4. __contraction_factor__ __(positive float, >1.)_: each gaussian in the log2 space is contracted by this factor to better separate candidate subpopulations. To tune follow guidelines from Dall'Olio et al.
 5. __populations_plot__ _(boolean)_: whether or not to plot the final summary about number of candidates subpopulations for each feature, useful to tune max_n_gaussians.
+
+
+
+
+
 
 
 
@@ -134,6 +164,11 @@ Perform the embedding on a 2D manifold of a pandas dataframe using the UMAP algo
 
 
 
+
+
+
+
+
 ___features_importance_per_cluster(self, select='original', compare_with='rest')___:
 
 Compute features importance within each cluster.
@@ -143,15 +178,25 @@ Compute features importance within each cluster.
 
 
 
+
+
+
+
+
 ___most_important_cluster_effect_sizes(self, rs, rs_p, n=10, cluster_number=-2, path="./cluster__expression.png")___:
 
-Horizontal bar plot with highest effect size features for a given cluster
+Horizontal bar plot with highest effect size features for a given cluster.
 
 1. __rs__ _(numpy array)_: a row for the 'res' output by 'features_importance_per_cluster', represents each feature's effect size for a given cluster
 2. __rs_p__ _(numpy array)_: a row for the 'res_p' output by 'features_importance_per_cluster', represents each feature's p-value for a given cluster
 3. __n__ _(integer)_: how many features to plot, in descending order of effect size
 4. __cluster_number__ _(integer, non-negative)_: number to use as header for cluster name, useful to distinguish multiple clusters.
 5. __path__ _(str)_: where to store the resulting plot (if saved)
+
+
+
+
+
 
 
 
@@ -163,30 +208,50 @@ Summary plot for all features.
 
 
 
+
+
+
+
+
 ___plot_embedding_clusters(self, clusterer, path="./__clusters.png")___:
 
-Plot HDBSCAN clusters onto real space and UMAP embedding coordinates with appropriate colormap
+Plot HDBSCAN clusters onto real space and UMAP embedding coordinates with appropriate colormap-
 
 1. __clusterer__ _(fitted hdbscan.HDBSCAN clustering object)_: fitted HDBSCAN clustering object used to cluster data from the embedding space
 2. __path__ _(str)_: path where to store the resulting plots if saved
 
 
 
+
+
+
+
+
 ___whole_dataset_summary_plots(self, alpha=0.9, legend_size=200, plot_with_legend=True, plot_without_legend=True, plot_noise=True)__:
 
-Plot a Maximum of 4 plots (2 with legend and 2 without legend) which summarize the main features and their self.interpretative_column for each cluster
+Plot a Maximum of 4 plots (2 with legend and 2 without legend) which summarize the main features and their self.interpretative_column for each cluster.
 
 1. __alpha__ _(float between 0 and 1)_: transparency for the plots
 2. __legend_size__ _(positive float)_: size for the dots in the legend
-3. __plot_with_legend__ _(bool)_: whether or not to make the 2 plots with legends (may be unreadable if too many clusters/too long labels are used)
-4. __plot_without_legend__ _(bool)_: whether or not to make the 2 plots without legends (useful if with legends the plot are unreadable, please notice that this parameter is not mandatory to be opposite to 'plot_with_legend')
-5. __plot_noise__ _(bool)_: whether or not to plot the noise cluster if found by HDBSCAN
+3. __plot_with_legend__ _(boolean)_: whether or not to make the 2 plots with legends (may be unreadable if too many clusters/too long labels are used)
+4. __plot_without_legend__ _(boolean)_: whether or not to make the 2 plots without legends (useful if with legends the plot are unreadable, please notice that this parameter is not mandatory to be opposite to 'plot_with_legend')
+5. __plot_noise__ _(boolean)_: whether or not to plot the noise cluster if found by HDBSCAN
+
+
+
+
+
 
 
 
 ___find_monitoring_features(self)___:
         
 Find which features are the main ones accoring to self.importance_column.
+
+
+
+
+
 
 
 
@@ -197,7 +262,12 @@ Plot cluster position in UMAP embedding and in real space, together with a summa
 1. __tiers_label__ _(str)_: string produced by func containing Tier 1 and Tier 2 features, which will be used as header for the plot
 2. __mask__ _(array-like of boolean values)_: boolean values corresponding to whether or not a single cell is part of the considered cluster
 3. __cluster_number__ _(integer, non-negative)_: number to use as header for cluster name, useful to distinguish multiple clusters.
-4. __path__ _(str)_: where to store the resulting plot (if saved)
+4. __path__ _(str)_: where to store the resulting plot (if saved).
+
+
+
+
+
 
 
 
@@ -209,13 +279,25 @@ Plot Kernel Density Estimation to compare a cluster with whole dataset using som
 2. __cluster_number__ _(integer, non-negative)_: number to use as header for cluster name, useful to distinguish multiple clusters.
 3. __monitoring_features__ _(list or array-like)_: list of features over which each cluster will be compared with whole sample using KDE plots
 4. __palette__ _(list of 2 rgb tuples)_: color palette to use for cluster or whole sample cells and KDE plots
-5. __path__ _(str)_: where to store the resulting plot (if saved)
+5. __path__ _(str)_: where to store the resulting plot (if saved).
+
+ 
+
+
+
 
 
 
 ___run_pipeline(self)___:
 
 Run the complete BRAQUE pipeline from preprocessing to plots and storing results.
+
+
+
+
+
+
+
 
 
 
