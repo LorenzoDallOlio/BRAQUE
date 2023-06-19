@@ -3,7 +3,7 @@
 
 ## Lazy users Guide
 
-Just install braque with `pip install -i https://test.pypi.org/simple/ braque`, we suggest to do so in an empty enviroment.
+Just download and install the requirements with `pip install -r requirements.txt`, then install braque with `pip install -i https://test.pypi.org/simple/ braque`, we suggest to do so in an empty enviroment.
 Then download the examples folder at https://github.com/LorenzoDallOlio/BRAQUE/tree/main/examples, and see if you can run BRAQUE-usage.py (it should take around a minute the whole procedure.
 
 Then replace the mòandatory things with your tidy data (original_db.csv, positions.csv, reference.csv, and edit the strings in the BRAQUE-usage.py accordingly).
@@ -34,9 +34,12 @@ Lastly, a robust measure of effect size[^3] is computed to estimate which marker
 
 ## Installation
 
-to download and use braque we suggest making it in a separate enviroment, install pip and then run
+
+Download the requirements.txt file from Github (https://github.com/LorenzoDallOlio/BRAQUE/).
+To download and use braque we suggest making it in a separate enviroment, install pip and then run
 
 ```
+pip install -r requirements.txt
 pip install -i https://test.pypi.org/simple/ braque
 ```
 to download the latest version of BRAQUE

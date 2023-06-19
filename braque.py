@@ -1138,11 +1138,11 @@ class BRAQUE():
                       fontweight='bold', fontsize=ft, color=axis.lines[0].get_color())
             axis.text(self.original_db.quantile(0.8).max(), 0.0, 'effect size: '+str(self.res.loc[cluster_number, self.monitoring_features[ii]])[:6],
                       fontweight='bold', fontsize=ft, color=axis.lines[0].get_color())
-            axis.plot([sub_db2.groupby('feature').median().loc[self.monitoring_features[ii]],
-                       sub_db2.groupby('feature').median().loc[self.monitoring_features[ii]]],
+            axis.plot([sub_db2.iloc[:, :-1].groupby('feature').median().loc[self.monitoring_features[ii]],
+                       sub_db2.iloc[:, :-1].groupby('feature').median().loc[self.monitoring_features[ii]]],
                        axis.get_ylim(), 'r--', linewidth=3)
-            axis.plot([sub_db.groupby('feature').median().loc[self.monitoring_features[ii]],
-                       sub_db.groupby('feature').median().loc[self.monitoring_features[ii]]],
+            axis.plot([sub_db.iloc[:, :-1].groupby('feature').median().loc[self.monitoring_features[ii]],
+                       sub_db.iloc[:, :-1].groupby('feature').median().loc[self.monitoring_features[ii]]],
                       axis.get_ylim(), 'b--', linewidth=3)
             axis.set_ylabel("")
 
@@ -1398,7 +1398,7 @@ class BRAQUE():
 
             # cluster sizes
             sizes = self.db.groupby(self.clusters).size()
-            sizes.to_excel(self.folder+self.area+"__clusters_sizes.xlsx", index_label='cluster')
+            sizes.to_csv(self.folder+self.area+"__clusters_sizes.csv", index_label='cluster')
             self.verboseprint("End of pipeline", datetime.now())
             
             
