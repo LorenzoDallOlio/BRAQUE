@@ -3,7 +3,7 @@
 
 ## Lazy users Guide
 
-Just download and install the requirements with `pip install -r requirements.txt`, then install braque with `pip install -i https://test.pypi.org/simple/ braque`, we suggest to do so in an empty enviroment.
+You should be able to simply run pip install braque, if that does not work try download and install the requirements with `pip install -r requirements.txt`, then install braque with `pip install -i https://test.pypi.org/simple/ braque`, in any case we suggest to do so in an empty enviroment.
 Then download the examples folder at https://github.com/LorenzoDallOlio/BRAQUE/tree/main/examples, and see if you can run BRAQUE-usage.py (the whole procedure should take around a minute).
 
 Original code was made using python 3.7, successive versions should not break the code but no continuous integration of this repo is performed yet, so use further version crefully and expecting possible differences.
@@ -42,8 +42,13 @@ Lastly, a robust measure of effect size[^3] is computed to estimate which marker
 
 ## Installation
 
+You should be able to just install BRAQUE by doing 
 
-Download the requirements.txt file from Github (https://github.com/LorenzoDallOlio/BRAQUE/).
+```
+pip install braque
+```
+
+If that does not work try to download the requirements.txt file from Github (https://github.com/LorenzoDallOlio/BRAQUE/).
 To download and use braque we suggest making it in a separate enviroment, install pip and then run
 
 ```
