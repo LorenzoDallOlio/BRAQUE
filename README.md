@@ -4,9 +4,11 @@
 ## Lazy users Guide
 
 Just download and install the requirements with `pip install -r requirements.txt`, then install braque with `pip install -i https://test.pypi.org/simple/ braque`, we suggest to do so in an empty enviroment.
-Then download the examples folder at https://github.com/LorenzoDallOlio/BRAQUE/tree/main/examples, and see if you can run BRAQUE-usage.py (it should take around a minute the whole procedure.
+Then download the examples folder at https://github.com/LorenzoDallOlio/BRAQUE/tree/main/examples, and see if you can run BRAQUE-usage.py (the whole procedure should take around a minute).
 
-Then replace the mòandatory things with your tidy data (original_db.csv, positions.csv, reference.csv, and edit the strings in the BRAQUE-usage.py accordingly).
+Original code was made using python 3.7, successive versions should not break the code but no continuous integration of this repo is performed yet, so use further version crefully and expecting possible differences.
+
+Then replace the mandatory things with your tidy data (original_db.csv, positions.csv, reference.csv, and edit the strings in the BRAQUE-usage.py accordingly).
 
 The basic usage is passing every argument to the class constructor, and then simply run ___self.run_pipeline()___ from the constructed object, or single parts of the pipeline if you want so.
 
